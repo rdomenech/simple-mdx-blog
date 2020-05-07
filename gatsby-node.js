@@ -1,26 +1,27 @@
-/*
 exports.createPages = async function({actions, graphql}) {
-    const {data} = await graphql`
+    const {data} = await graphql(`
         query {
-            allMdx(sort: {fields: frontmatter___date, order: DESC}) {
-                nodes {
-                  frontmatter {
+            allMdx(sort: { fields: frontmatter___date, order: DESC }) {
+            edges {
+                node {
+                frontmatter {
                     slug
-                  }
-                  id
+                }
+                id
                 }
             }
-        }        
-    `
+            }
+        }       
+    `)
 
 // create paginated pages for posts
 
     const postPerPage = 3
 
-    const numPages = Math.ceil(data.allMdx.nodes.length / postPerPage)
+    const numPages = Math.ceil(data.allMdx.edges.length / postPerPage)
 
     Array.from({ length: numPages }).forEach((_, i) => {
-        actions.createPages({
+        actions.createPage({
             path: i === 0 ? `/` : `/${i + 1}`,
             component: require.resolve("./src/templates/allPosts.js"),
             context: {
@@ -33,7 +34,7 @@ exports.createPages = async function({actions, graphql}) {
     })
 
 // create single blog posts
-
+/*
     data.allMdx.nodes.forEach(node => {
         const slug = node.frontmatter.slug
         const id = node.id
@@ -43,5 +44,5 @@ exports.createPages = async function({actions, graphql}) {
             context: {id},
         })
     })
-}
 */
+}
