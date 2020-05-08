@@ -12,7 +12,7 @@ const singlePost = ({data}) => {
             <FeatureImage fixed={featureImage} />
             <Post>
                 <H1 margin="0 0 2rem 0">{data.mdx.frontmatter.title}</H1>
-                <MDXRenderer>{data.MDXRenderer.body}</MDXRenderer>
+                <MDXRenderer>{data.mdx.body}</MDXRenderer>
             </Post>
         </Container>
     )
@@ -32,9 +32,9 @@ export const pageQuery = graphql`
                 featureImage {
                     publicURL
                     childImageSharp {
-                        fixed {
-                            ...GatsbyImageSharpFixed
-                        }
+                      fixed {
+                        ...GatsbyImageSharpFixed
+                      }
                     }
                 }
             }
